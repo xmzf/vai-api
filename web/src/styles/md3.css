@@ -1,0 +1,309 @@
+/*
+ * Material 3 visual layer for New API.
+ * Keeps the existing shadcn/Base UI primitives and applies MD3
+ * color roles, shape, elevation, typography, state layers and sizing.
+ */
+
+:root {
+  --md-sys-color-primary: oklch(0.48 0.17 255);
+  --md-sys-color-on-primary: oklch(1 0 0);
+  --md-sys-color-primary-container: oklch(0.91 0.055 255);
+  --md-sys-color-on-primary-container: oklch(0.23 0.09 255);
+  --md-sys-color-secondary: oklch(0.42 0.07 255);
+  --md-sys-color-on-secondary: oklch(1 0 0);
+  --md-sys-color-secondary-container: oklch(0.91 0.035 255);
+  --md-sys-color-on-secondary-container: oklch(0.22 0.05 255);
+  --md-sys-color-surface: oklch(0.985 0.004 255);
+  --md-sys-color-surface-container-low: oklch(0.975 0.006 255);
+  --md-sys-color-surface-container: oklch(0.955 0.008 255);
+  --md-sys-color-surface-container-high: oklch(0.925 0.01 255);
+  --md-sys-color-surface-container-highest: oklch(0.89 0.012 255);
+  --md-sys-color-on-surface: oklch(0.18 0.015 255);
+  --md-sys-color-on-surface-variant: oklch(0.43 0.02 255);
+  --md-sys-color-outline: oklch(0.58 0.02 255);
+  --md-sys-color-outline-variant: oklch(0.82 0.018 255);
+  --md-sys-color-error: oklch(0.54 0.19 28);
+  --md-sys-color-on-error: oklch(1 0 0);
+  --md-shape-xs: 4px;
+  --md-shape-sm: 8px;
+  --md-shape-md: 12px;
+  --md-shape-lg: 16px;
+  --md-shape-xl: 28px;
+  --md-state-hover: 0.08;
+  --md-state-focus: 0.12;
+  --md-state-pressed: 0.12;
+  --md-elevation-1: 0 1px 3px rgb(20 30 50 / 0.12), 0 1px 2px rgb(20 30 50 / 0.08);
+  --md-elevation-2: 0 3px 8px rgb(20 30 50 / 0.14), 0 1px 3px rgb(20 30 50 / 0.08);
+}
+
+.dark {
+  --md-sys-color-primary: oklch(0.79 0.12 255);
+  --md-sys-color-on-primary: oklch(0.22 0.06 255);
+  --md-sys-color-primary-container: oklch(0.32 0.08 255);
+  --md-sys-color-on-primary-container: oklch(0.92 0.05 255);
+  --md-sys-color-secondary: oklch(0.78 0.07 255);
+  --md-sys-color-on-secondary: oklch(0.22 0.04 255);
+  --md-sys-color-secondary-container: oklch(0.31 0.05 255);
+  --md-sys-color-on-secondary-container: oklch(0.9 0.04 255);
+  --md-sys-color-surface: oklch(0.18 0.01 255);
+  --md-sys-color-surface-container-low: oklch(0.205 0.012 255);
+  --md-sys-color-surface-container: oklch(0.235 0.014 255);
+  --md-sys-color-surface-container-high: oklch(0.27 0.016 255);
+  --md-sys-color-surface-container-highest: oklch(0.31 0.018 255);
+  --md-sys-color-on-surface: oklch(0.93 0.008 255);
+  --md-sys-color-on-surface-variant: oklch(0.75 0.015 255);
+  --md-sys-color-outline: oklch(0.66 0.018 255);
+  --md-sys-color-outline-variant: oklch(0.38 0.018 255);
+  --md-sys-color-error: oklch(0.8 0.13 28);
+  --md-sys-color-on-error: oklch(0.25 0.08 28);
+  --md-elevation-1: 0 1px 3px rgb(0 0 0 / 0.32), 0 1px 2px rgb(0 0 0 / 0.22);
+  --md-elevation-2: 0 4px 10px rgb(0 0 0 / 0.34), 0 2px 4px rgb(0 0 0 / 0.22);
+}
+
+/* Base canvas and typography */
+body {
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.015em;
+}
+
+/* MD3 buttons: filled / tonal / outlined / text behavior */
+[data-slot='button'] {
+  min-height: 40px;
+  border-radius: 999px;
+  padding-inline: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: none;
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+}
+
+[data-slot='button'][data-variant='default'] {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+
+[data-slot='button'][data-variant='secondary'] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+[data-slot='button'][data-variant='outline'] {
+  background: transparent;
+  border: 1px solid var(--md-sys-color-outline);
+  color: var(--md-sys-color-on-surface);
+}
+
+[data-slot='button'][data-variant='ghost'],
+[data-slot='button'][data-variant='link'] {
+  color: var(--md-sys-color-primary);
+}
+
+[data-slot='button']:hover:not(:disabled) {
+  filter: none;
+  box-shadow: inset 0 0 0 999px rgb(0 0 0 / var(--md-state-hover));
+}
+
+[data-slot='button']:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 2px;
+}
+
+[data-slot='button']:active:not(:disabled) {
+  transform: none;
+  box-shadow: inset 0 0 0 999px rgb(0 0 0 / var(--md-state-pressed));
+}
+
+/* Cards use MD3 surface containers rather than heavy borders */
+[data-slot='card'] {
+  border-radius: var(--md-shape-lg);
+  border-color: var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: none;
+}
+
+[data-slot='card-header'] {
+  padding: 20px 24px 12px;
+}
+
+[data-slot='card-content'] {
+  padding-inline: 24px;
+}
+
+[data-slot='card-footer'] {
+  padding: 12px 24px 20px;
+}
+
+/* Inputs and selects */
+[data-slot='input'],
+[data-slot='textarea'],
+[data-slot='select-trigger'] {
+  min-height: 48px;
+  border-radius: var(--md-shape-sm);
+  border-color: var(--md-sys-color-outline);
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+
+[data-slot='input']:focus,
+[data-slot='textarea']:focus,
+[data-slot='select-trigger']:focus-visible {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+
+/* Dialog / popover surfaces */
+[data-slot='dialog-content'],
+[data-slot='popover-content'],
+[data-slot='dropdown-menu-content'],
+[data-slot='command'] {
+  border-radius: var(--md-shape-xl);
+  border-color: var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface-container-high);
+  box-shadow: var(--md-elevation-2);
+}
+
+[data-slot='dialog-content'] {
+  padding: 24px;
+}
+
+/* Menus and list rows */
+[data-slot='dropdown-menu-item'],
+[data-slot='command-item'],
+[data-slot='select-item'] {
+  min-height: 44px;
+  border-radius: var(--md-shape-sm);
+  margin-inline: 4px;
+}
+
+[data-slot='dropdown-menu-item']:focus,
+[data-slot='command-item'][data-selected='true'],
+[data-slot='select-item'][data-highlighted] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Tabs become MD3 primary tabs */
+[data-slot='tabs-list'] {
+  min-height: 48px;
+  border-radius: 999px;
+  background: var(--md-sys-color-surface-container);
+  padding: 4px;
+}
+
+[data-slot='tabs-trigger'] {
+  min-height: 40px;
+  border-radius: 999px;
+  padding-inline: 16px;
+}
+
+[data-slot='tabs-trigger'][data-state='active'] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  box-shadow: none;
+}
+
+/* Sidebar: MD3 navigation drawer */
+[data-slot='sidebar'] {
+  background: var(--md-sys-color-surface-container-low);
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+[data-slot='sidebar-menu-button'] {
+  min-height: 48px;
+  border-radius: 999px;
+  margin-block: 2px;
+}
+
+[data-slot='sidebar-menu-button'][data-active='true'],
+[data-slot='sidebar-menu-button'][aria-current='page'] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 650;
+}
+
+[data-slot='sidebar-menu-button']:hover {
+  background: color-mix(in oklch, var(--md-sys-color-secondary-container) 70%, transparent);
+}
+
+/* Tables: quieter MD3 surface hierarchy */
+[data-slot='table'] {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-lg);
+  background: var(--md-sys-color-surface-container-low);
+}
+
+[data-slot='table'] thead {
+  background: var(--md-sys-color-surface-container);
+}
+
+[data-slot='table'] th {
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 650;
+}
+
+[data-slot='table'] tbody tr:hover {
+  background: color-mix(in oklch, var(--md-sys-color-primary) 6%, transparent);
+}
+
+/* Badges / chips */
+[data-slot='badge'] {
+  min-height: 28px;
+  border-radius: 999px;
+  padding-inline: 10px;
+  font-weight: 600;
+}
+
+/* Toasts */
+[data-sonner-toast] {
+  border-radius: var(--md-shape-lg) !important;
+  border: 1px solid var(--md-sys-color-outline-variant) !important;
+  background: var(--md-sys-color-surface-container-high) !important;
+  color: var(--md-sys-color-on-surface) !important;
+  box-shadow: var(--md-elevation-2) !important;
+}
+
+/* Scrollbars */
+* {
+  scrollbar-color: var(--md-sys-color-outline-variant) transparent;
+}
+
+/* Auth pages: clean MD3 centered surface */
+.md3-auth-shell {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in oklch, var(--md-sys-color-primary) 10%, transparent), transparent 38%),
+    var(--md-sys-color-surface);
+}
+
+.md3-auth-card {
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-xl);
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--md-elevation-1);
+}
+
+@media (max-width: 640px) {
+  [data-slot='button'] {
+    min-height: 44px;
+  }
+
+  [data-slot='card-header'] {
+    padding-inline: 20px;
+  }
+
+  [data-slot='card-content'] {
+    padding-inline: 20px;
+  }
+
+  .md3-auth-card {
+    border-radius: var(--md-shape-lg);
+  }
+}
