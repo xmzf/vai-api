@@ -61,18 +61,18 @@ export function SystemBrand(props: SystemBrandProps) {
         to='/'
         aria-label={t('Go to home')}
         className={cn(
-          'text-foreground inline-flex h-7 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium transition-colors outline-none select-none',
-          'hover:bg-accent focus-visible:ring-ring/40 focus-visible:ring-2'
+          'text-foreground inline-flex h-11 max-w-[17rem] items-center gap-2 rounded-full px-2.5 pr-4 text-sm font-semibold transition-colors outline-none select-none',
+          'bg-secondary/70 hover:bg-secondary focus-visible:ring-ring/40 focus-visible:ring-2 dark:bg-secondary/50'
         )}
       >
-        <div className='flex size-5 items-center justify-center overflow-hidden rounded-md'>
+        <div className='flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10 ring-1 ring-primary/10'>
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-md object-cover'
+            className='size-full rounded-full object-cover'
           />
         </div>
-        <span className='max-w-[12rem] truncate'>{name}</span>
+        <span className='truncate'>{name}</span>
       </Link>
     )
   }
@@ -82,19 +82,23 @@ export function SystemBrand(props: SystemBrandProps) {
       <SidebarMenuItem>
         <SidebarMenuButton
           size='lg'
-          className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
+          className='h-[72px] rounded-[20px] px-3 hover:bg-sidebar-accent/70 active:bg-sidebar-accent'
           render={<div />}
         >
-          <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
+          <div className='flex aspect-square size-10 shrink-0 items-center justify-center overflow-hidden rounded-[14px] bg-primary/10 ring-1 ring-primary/10'>
             <img
               src={logo}
               alt={t('Logo')}
-              className='size-full rounded-lg object-cover'
+              className='size-full rounded-[14px] object-cover'
             />
           </div>
-          <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
-            <span className='truncate text-xs'>{version}</span>
+          <div className='grid flex-1 text-start leading-tight group-data-[collapsible=icon]:hidden'>
+            <span className='truncate text-[15px] font-semibold tracking-tight'>
+              {name}
+            </span>
+            <span className='truncate pt-0.5 text-[11px] text-muted-foreground'>
+              {version}
+            </span>
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>
