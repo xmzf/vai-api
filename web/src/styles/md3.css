@@ -307,3 +307,108 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: var(--md-shape-lg);
   }
 }
+
+
+/* Refined app chrome: flatter surfaces, clearer hierarchy, less visual noise */
+[data-slot='sidebar'] {
+  border-inline-end-color: color-mix(
+    in oklch,
+    var(--md-sys-color-outline-variant) 70%,
+    transparent
+  );
+}
+
+[data-slot='sidebar-content'] {
+  background: var(--md-sys-color-surface-container-low);
+}
+
+[data-slot='sidebar-menu'] {
+  gap: 2px;
+}
+
+[data-slot='sidebar-group'] {
+  padding-inline: 0;
+}
+
+[data-slot='sidebar-group-label'] {
+  height: 32px;
+  padding-inline: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+[data-slot='sidebar-menu-button'] {
+  padding-inline: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+[data-slot='sidebar-menu-button'] svg {
+  width: 18px;
+  height: 18px;
+}
+
+[data-slot='sidebar-menu-button'][data-active='true'],
+[data-slot='sidebar-menu-button'][aria-current='page'] {
+  min-height: 48px;
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+[data-slot='sidebar-menu-sub-button'] {
+  min-height: 40px;
+  border-radius: 999px;
+  padding-inline: 12px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+[data-slot='sidebar-menu-sub-button'][data-active='true'],
+[data-slot='sidebar-menu-sub-button'][aria-current='page'] {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+[data-slot='header'] {
+  background: color-mix(
+    in oklch,
+    var(--md-sys-color-surface) 88%,
+    transparent
+  );
+  border-bottom-color: color-mix(
+    in oklch,
+    var(--md-sys-color-outline-variant) 75%,
+    transparent
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+[data-slot='header'] > * {
+  min-height: 56px;
+}
+
+[data-slot='header'] [data-slot='button'] {
+  min-height: 40px;
+  padding-inline: 12px;
+}
+
+[data-slot='header'] [data-slot='button'][data-size='icon'] {
+  width: 40px;
+  padding-inline: 0;
+}
+
+.md3-page {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .md3-page {
+    padding: 16px;
+  }
+
+  [data-slot='sidebar-content'] {
+    padding-bottom: 12px;
+  }
+}
